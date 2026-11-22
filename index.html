@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#c51d62">
+  <meta name="description" content="Order Ms. Rya Fally Burkina Drink. Creamy, refreshing Burkina drink with grains.">
+  <title>Ms. Rya | Fally Burkina Drink</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pink:#e83e83; --raspberry:#b81758; --deep:#78133f;
+      --cream:#fff8f7; --blush:#fde8ef; --gold:#e8b94f;
+      --ink:#321b27; --muted:#806b75; --white:#fff;
+      --line:#f1d8e1; --shadow:0 18px 55px rgba(120,19,63,.12);
+      --sans:"DM Sans",Arial,sans-serif; --serif:"Playfair Display",Georgia,serif;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;scroll-padding-top:90px}
+    body{font-family:var(--sans);color:var(--ink);background:var(--cream);overflow-x:hidden}
+    body.lock{overflow:hidden}
+    button,input,select{font:inherit} button{cursor:pointer}
+    a{color:inherit;text-decoration:none} img{display:block;max-width:100%}
+    .container{width:min(1200px,calc(100% - 42px));margin:auto}
+    .demo-bar{background:var(--deep);color:#fff;text-align:center;padding:8px 12px;font-size:10px;letter-spacing:.65px}
+    .announcement{background:var(--blush);color:var(--deep);text-align:center;padding:10px 12px;font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase}
+    .header{position:sticky;top:0;z-index:100;background:rgba(255,248,247,.94);backdrop-filter:blur(15px);border-bottom:1px solid var(--line)}
+    .navbar{min-height:78px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:25px}
+    .brand{display:flex;align-items:center;gap:10px;width:max-content}
+    .brand-mark{width:43px;height:43px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,var(--pink),var(--deep));color:white;font-family:var(--serif);font-weight:800;font-size:21px;border:2px solid var(--gold);box-shadow:0 4px 12px #b8175830}
+    .brand-copy strong{display:block;font-family:var(--serif);font-size:23px;line-height:1;color:var(--raspberry)}
+    .brand-copy small{display:block;margin-top:5px;font-size:8px;letter-spacing:2.1px;color:var(--muted);text-transform:uppercase}
+    .nav-links{display:flex;align-items:center;gap:28px}
+    .nav-links a{font-size:11px;font-weight:800;color:#624653;transition:.2s}
+    .nav-links a:hover{color:var(--pink)}
+    .nav-actions{display:flex;justify-content:flex-end;align-items:center;gap:10px}
+    .icon-btn{position:relative;width:40px;height:40px;border:1px solid var(--line);border-radius:50%;background:#fff;color:var(--deep);display:grid;place-items:center}
+    .icon-btn svg{width:19px;height:19px}
+    .cart-count{position:absolute;right:-4px;top:-4px;width:18px;height:18px;border-radius:50%;background:var(--pink);color:white;font-size:9px;font-weight:800;display:grid;place-items:center}
+    .menu-btn{display:none}
+    .btn{min-height:48px;padding:0 23px;border:1px solid transparent;display:inline-flex;align-items:center;justify-content:center;gap:9px;font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;transition:.25s}
+    .btn-primary{background:var(--raspberry);color:white;border-radius:30px;box-shadow:0 8px 20px #b8175830}
+    .btn-primary:hover{background:var(--deep);transform:translateY(-2px)}
+    .btn-light{background:#fff;color:var(--deep);border-radius:30px}
+    .btn-light:hover{background:var(--blush);transform:translateY(-2px)}
+    .btn-outline{border-color:#ffffffa8;color:#fff;background:#ffffff12;border-radius:30px}
+    .btn-outline:hover{background:#fff;color:var(--deep)}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:9px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase}
+    .eyebrow:before{content:"";width:25px;height:2px;background:currentColor}
+    /* HERO SLIDESHOW */
+    .hero{position:relative;min-height:620px;display:flex;align-items:center;isolation:isolate;overflow:hidden;background:#7b244a}
+    .hero-bg{position:absolute;inset:0;z-index:-2;background-size:cover;background-position:center;transform:scale(1.03);transition:opacity .55s,transform 7s}
+    .hero:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(55,8,31,.82),rgba(83,14,46,.53) 52%,rgba(70,12,39,.12))}
+    .hero-content{width:min(1200px,calc(100% - 42px));margin:auto;padding:90px 0;color:white;transition:opacity .3s}
+    .hero-content .eyebrow{color:#ffe4a5}
+    .hero h1{max-width:680px;margin:22px 0 18px;font-family:var(--serif);font-size:clamp(47px,7vw,82px);line-height:1.04;letter-spacing:-1.8px}
+    .hero h1 em{color:#ffd4e3;font-style:normal}
+    .hero p{max-width:470px;color:#fff0f5;font-size:14px;line-height:1.85}
+    .hero-buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+    .hero-dots{position:absolute;left:max(21px,calc((100% - 1200px)/2));bottom:35px;display:flex;gap:7px}
+    .hero-dot{height:4px;width:22px;border:0;background:#ffffff70;border-radius:8px}
+    .hero-dot.active{width:39px;background:#fff}
+    .hero-controls{position:absolute;right:max(21px,calc((100% - 1200px)/2));bottom:20px;display:flex;gap:8px}
+    .hero-arrow{width:40px;height:40px;border:1px solid #ffffff90;border-radius:50%;background:#ffffff18;color:white;font-size:18px}
+    .hero-arrow:hover{background:white;color:var(--deep)}
+    /* BENEFITS */
+    .benefits{background:white;border-bottom:1px solid var(--line)}
+    .benefit-grid{display:grid;grid-template-columns:repeat(3,1fr);padding:20px 0}
+    .benefit{display:flex;align-items:center;justify-content:center;gap:12px;padding:9px 15px;border-right:1px solid var(--line)}
+    .benefit:last-child{border:0}
+    .benefit-icon{width:39px;height:39px;border-radius:50%;display:grid;place-items:center;background:var(--blush);color:var(--raspberry);font-size:18px}
+    .benefit strong{display:block;font-size:11px}.benefit small{display:block;margin-top:4px;color:var(--muted);font-size:9px}
+    .section{padding:82px 0}
+    .section-heading{text-align:center;margin-bottom:36px}
+    .section-heading .eyebrow{color:var(--pink)}
+    .section-heading h2{font-family:var(--serif);font-size:clamp(31px,4vw,47px);color:var(--deep);margin:12px 0 9px}
+    .section-heading p{color:var(--muted);font-size:12px;line-height:1.8}
+    .section-heading .demo-note{margin-top:8px;font-size:10px;color:#a34a70;font-weight:700}
+    /* CATEGORY CARDS */
+    .category-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+    .category-card{position:relative;height:285px;border-radius:17px;overflow:hidden;cursor:pointer;background:var(--blush);box-shadow:var(--shadow)}
+    .category-card img{width:100%;height:100%;object-fit:cover;transition:transform .7s}
+    .category-card:hover img{transform:scale(1.06)}
+    .category-card:after{content:"";position:absolute;inset:35% 0 0;background:linear-gradient(transparent,rgba(62,10,35,.75))}
+    .category-copy{position:absolute;z-index:2;left:22px;bottom:20px;color:#fff}
+    .category-copy small{font-size:8px;letter-spacing:1.8px;text-transform:uppercase}
+    .category-copy h3{font-family:var(--serif);font-size:25px;margin:5px 0}
+    .category-copy b{font-size:9px;letter-spacing:1px;text-transform:uppercase}
+    /* PROMO SLIDESHOW */
+    .promo-slider{position:relative;min-height:390px;margin:0 auto 0;overflow:hidden;background:var(--deep);isolation:isolate}
+    .promo-slide-bg{position:absolute;inset:0;z-index:-2;background-size:cover;background-position:center;transition:opacity .5s}
+    .promo-slider:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(65,7,37,.88),rgba(102,14,57,.54),rgba(0,0,0,.08))}
+    .promo-content{width:min(1200px,calc(100% - 42px));margin:auto;padding:76px 0;color:white;transition:opacity .3s}
+    .promo-content .eyebrow{color:#ffe2a0}
+    .promo-content h2{max-width:600px;font-family:var(--serif);font-size:clamp(35px,5vw,58px);line-height:1.1;margin:15px 0}
+    .promo-content p{max-width:450px;color:#ffeef4;font-size:12px;line-height:1.8;margin-bottom:22px}
+    .promo-dots{position:absolute;right:max(22px,calc((100% - 1200px)/2));bottom:25px;display:flex;gap:7px}
+    .promo-dot{width:9px;height:9px;border-radius:50%;border:1px solid white;background:transparent}
+    .promo-dot.active{background:white}
+    /* PRODUCTS */
+    .shop-section{background:#fff}
+    .shop-toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:25px}
+    .filter-list{display:flex;gap:7px;flex-wrap:wrap}
+    .filter-btn{padding:10px 15px;border:1px solid var(--line);border-radius:22px;background:white;color:#795866;font-size:9px;font-weight:800}
+    .filter-btn.active,.filter-btn:hover{background:var(--raspberry);border-color:var(--raspberry);color:white}
+    .shop-tools{display:flex;gap:8px}
+    .search-wrap{position:relative}
+    .search-wrap svg{position:absolute;left:12px;top:11px;width:15px;color:var(--muted)}
+    .search-wrap input,.sort-select{height:38px;border:1px solid var(--line);background:var(--cream);outline:none;border-radius:22px;font-size:10px}
+    .search-wrap input{width:190px;padding:0 12px 0 34px}
+    .sort-select{padding:0 12px;color:var(--ink)}
+    .product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:25px 17px}
+    .product-card{min-width:0;border:1px solid #f5e4ea;border-radius:15px;overflow:hidden;background:#fff;transition:transform .25s,box-shadow .25s}
+    .product-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+    .product-image{position:relative;aspect-ratio:1.08;background:var(--blush);cursor:pointer;overflow:hidden}
+    .product-image img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+    .product-card:hover .product-image img{transform:scale(1.04)}
+    .product-badge{position:absolute;top:12px;left:12px;background:#fff;color:var(--raspberry);padding:7px 10px;border-radius:20px;font-size:8px;font-weight:800;text-transform:uppercase}
+    .quick-view{position:absolute;bottom:10px;left:10px;right:10px;padding:10px;border:0;border-radius:20px;background:#ffffffed;color:var(--deep);font-size:9px;font-weight:800;text-transform:uppercase}
+    .product-info{padding:15px}
+    .product-category{font-size:8px;letter-spacing:1.4px;text-transform:uppercase;color:var(--pink);font-weight:800}
+    .product-name{font-family:var(--serif);font-size:18px;color:var(--deep);margin:6px 0}
+    .product-description{font-size:10px;color:var(--muted);line-height:1.6;min-height:32px}
+    .product-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px}
+    .product-price{font-size:13px;font-weight:800;color:var(--raspberry)}
+    .add-btn{width:35px;height:35px;border:0;border-radius:50%;background:var(--raspberry);color:#fff;font-size:21px}
+    .add-btn:hover{background:var(--deep)}
+    .empty-state{grid-column:1/-1;text-align:center;padding:55px 15px;color:var(--muted);font-size:12px}
+    .price-disclaimer{text-align:center;margin-top:22px;color:#9a6479;font-size:10px;line-height:1.6}
+    /* STORY / ABOUT */
+    .story{display:grid;grid-template-columns:1fr 1fr;min-height:410px;background:var(--blush);border-radius:20px;overflow:hidden}
+    .story-image{min-height:410px}
+    .story-image img{width:100%;height:100%;object-fit:cover}
+    .story-copy{padding:55px clamp(25px,6vw,75px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+    .story-copy .eyebrow{color:var(--pink)}
+    .story-copy h2{font-family:var(--serif);font-size:clamp(31px,4vw,46px);color:var(--deep);line-height:1.12;margin:15px 0}
+    .story-copy p{font-size:12px;line-height:1.9;color:var(--muted);margin-bottom:22px}
+    .promise-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+    .promise{padding:18px 10px;text-align:center;background:white;border:1px solid var(--line);border-radius:13px}
+    .promise b{display:block;color:var(--raspberry);font-size:11px}.promise span{display:block;color:var(--muted);font-size:9px;margin-top:5px}
+    /* CONTACT CTA */
+    .contact-band{background:linear-gradient(120deg,var(--raspberry),var(--deep));color:white;text-align:center;padding:65px 20px}
+    .contact-band h2{font-family:var(--serif);font-size:clamp(30px,4vw,44px);margin:12px 0}
+    .contact-band p{font-size:12px;color:#ffeaf1;margin-bottom:23px}
+    /* FOOTER */
+    .footer{background:#351322;color:white;padding:55px 0 20px}
+    .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:30px;padding-bottom:35px}
+    .footer .brand-copy strong{color:white}.footer .brand-copy small{color:#f7b8d0}
+    .footer-desc{max-width:260px;color:#e2c6d2;font-size:10px;line-height:1.9;margin-top:15px}
+    .footer h4{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:17px;color:#ffd4e3}
+    .footer-links{display:grid;gap:12px}
+    .footer-links a,.footer-links span{font-size:10px;color:#e2c6d2}
+    .footer-links a:hover{color:white}
+    .footer-bottom{border-top:1px solid #75445b;padding-top:18px;display:flex;justify-content:space-between;gap:15px;color:#c5a5b4;font-size:9px}
+    /* CART + OVERLAYS */
+    .overlay{position:fixed;inset:0;background:#21091480;z-index:200;opacity:0;visibility:hidden;transition:.25s}
+    .overlay.show{opacity:1;visibility:visible}
+    .cart-drawer{position:fixed;z-index:201;right:0;top:0;width:min(430px,100%);height:100%;background:var(--cream);transform:translateX(105%);transition:transform .3s;display:flex;flex-direction:column}
+    .cart-drawer.open{transform:translateX(0)}
+    .drawer-head{display:flex;justify-content:space-between;align-items:center;padding:20px;border-bottom:1px solid var(--line)}
+    .drawer-head h3{font-family:var(--serif);font-size:25px;color:var(--deep)}
+    .close-btn{width:34px;height:34px;border:1px solid var(--line);border-radius:50%;background:white;color:var(--deep);font-size:19px}
+    .cart-items{flex:1;overflow:auto;padding:18px}
+    .cart-empty{text-align:center;padding:60px 12px;color:var(--muted);font-size:11px}
+    .cart-empty strong{display:block;font-family:var(--serif);font-size:22px;color:var(--deep);margin-bottom:8px}
+    .cart-item{display:grid;grid-template-columns:76px 1fr auto;gap:12px;padding-bottom:15px;margin-bottom:15px;border-bottom:1px solid var(--line)}
+    .cart-item img{width:76px;height:84px;object-fit:cover;border-radius:9px;background:var(--blush)}
+    .cart-item h4{font-size:12px;color:var(--deep);margin:3px 0 6px}
+    .cart-item p{font-size:11px;color:var(--raspberry);font-weight:800}
+    .cart-item small{font-size:9px;color:var(--muted)}
+    .qty{display:flex;align-items:center;gap:9px;margin-top:9px}
+    .qty button{width:23px;height:23px;border:1px solid var(--line);background:white;border-radius:50%}
+    .qty span{font-size:10px}
+    .remove-item{border:0;background:transparent;color:#9d7182;font-size:9px}
+    .cart-footer{padding:20px;background:white;border-top:1px solid var(--line)}
+    .subtotal{display:flex;justify-content:space-between;font-size:13px;font-weight:800;margin-bottom:8px}
+    .cart-note{font-size:9px;color:var(--muted);line-height:1.6;margin-bottom:14px}
+    .checkout-btn{width:100%;border:0}
+    .continue{display:block;text-align:center;margin-top:13px;color:var(--muted);font-size:10px;cursor:pointer}
+    /* QUICK VIEW */
+    .quick-modal{position:fixed;z-index:220;inset:0;display:grid;place-items:center;padding:18px;opacity:0;visibility:hidden;transition:.2s}
+    .quick-modal.show{opacity:1;visibility:visible}
+    .modal-card{position:relative;width:min(720px,100%);max-height:90vh;overflow:auto;display:grid;grid-template-columns:1fr 1fr;background:var(--cream);border-radius:17px;overflow:hidden;transform:translateY(12px);transition:.2s}
+    .quick-modal.show .modal-card{transform:translateY(0)}
+    .modal-image{min-height:390px;background:var(--blush)}
+    .modal-image img{width:100%;height:100%;object-fit:cover}
+    .modal-content{padding:35px 28px;display:flex;flex-direction:column;justify-content:center}
+    .modal-content h3{font-family:var(--serif);font-size:27px;color:var(--deep);margin:8px 0}
+    .modal-content p{font-size:11px;color:var(--muted);line-height:1.8;margin:10px 0}
+    .modal-price{font-size:18px;color:var(--raspberry);font-weight:800}
+    .modal-label{font-size:10px;font-weight:800;margin:13px 0 8px}
+    .option-list{display:flex;gap:7px;flex-wrap:wrap}
+    .option-btn{border:1px solid var(--line);background:white;border-radius:20px;padding:8px 12px;font-size:9px}
+    .option-btn.selected{background:var(--deep);color:white;border-color:var(--deep)}
+    .modal-add{margin-top:20px}
+    .modal-close{position:absolute;z-index:2;right:10px;top:10px;width:32px;height:32px;border:0;border-radius:50%;background:white;font-size:18px}
+    /* MOBILE NAV + TOAST */
+    .mobile-menu{position:fixed;z-index:190;left:0;top:0;width:min(320px,88%);height:100%;background:var(--cream);padding:23px;transform:translateX(-105%);transition:.3s}
+    .mobile-menu.open{transform:translateX(0)}
+    .mobile-menu-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:35px}
+    .mobile-links{display:grid}
+    .mobile-links a{padding:16px 0;border-bottom:1px solid var(--line);font-family:var(--serif);font-size:20px;color:var(--deep)}
+    .toast{position:fixed;z-index:300;left:50%;bottom:22px;transform:translate(-50%,20px);padding:12px 18px;background:var(--deep);color:white;border-radius:25px;font-size:10px;opacity:0;visibility:hidden;transition:.2s;box-shadow:var(--shadow);white-space:nowrap}
+    .toast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity .65s,transform .65s}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    @media(max-width:900px){
+      .nav-links{gap:14px}.nav-links a{font-size:10px}
+      .category-grid{grid-template-columns:repeat(3,1fr)}
+      .product-grid{grid-template-columns:repeat(2,1fr)}
+      .footer-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:650px){
+      .container{width:calc(100% - 30px)}
+      .demo-bar{font-size:8px}.announcement{font-size:8px;letter-spacing:.6px}
+      .navbar{min-height:67px;display:flex;gap:8px}
+      .menu-btn{display:grid;order:-1}
+      .nav-links{display:none}
+      .brand{margin-right:auto;gap:7px}.brand-mark{width:37px;height:37px;font-size:18px}
+      .brand-copy strong{font-size:20px}.brand-copy small{font-size:7px;letter-spacing:1.4px}
+      .nav-actions{gap:5px}.icon-btn{width:36px;height:36px}
+      .hero{min-height:560px}
+      .hero:after{background:linear-gradient(90deg,rgba(55,8,31,.83),rgba(83,14,46,.48))}
+      .hero-content{width:calc(100% - 34px);padding:75px 0 105px}
+      .hero h1{font-size:clamp(43px,12vw,62px);letter-spacing:-1px}
+      .hero p{font-size:12px;max-width:330px}
+      .hero-dots{left:17px;bottom:29px}.hero-controls{right:17px;bottom:15px}
+      .hero-arrow{width:34px;height:34px}
+      .benefit-grid{grid-template-columns:1fr;padding:8px 0}
+      .benefit{justify-content:flex-start;border-right:0;border-bottom:1px solid var(--line);padding:11px 7px}
+      .benefit:last-child{border:0}
+      .section{padding:60px 0}.section-heading{margin-bottom:25px}
+      .category-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+      .category-card{height:215px;border-radius:12px}
+      .category-copy{left:12px;bottom:13px}.category-copy h3{font-size:18px}.category-copy small{font-size:7px}
+      .promo-slider{min-height:355px}
+      .promo-content{width:calc(100% - 34px);padding:60px 0}
+      .promo-content h2{font-size:38px}
+      .shop-toolbar{align-items:stretch}
+      .filter-list{flex-wrap:nowrap;overflow:auto;padding-bottom:5px}
+      .filter-btn{white-space:nowrap;padding:9px 12px}
+      .shop-tools{width:100%}.search-wrap{flex:1}.search-wrap input{width:100%}.sort-select{max-width:125px}
+      .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:17px 10px}
+      .product-info{padding:11px}.product-name{font-size:15px}.product-description{font-size:9px}
+      .product-price{font-size:11px}.quick-view{font-size:8px;padding:8px}
+      .story{grid-template-columns:1fr}.story-image{min-height:280px;height:280px}
+      .story-copy{padding:34px 24px}
+      .promise-grid{gap:7px}.promise{padding:13px 5px}.promise b{font-size:9px}.promise span{font-size:8px}
+      .footer-grid{gap:28px 16px}.footer-grid>div:first-child{grid-column:1/-1}
+      .footer-bottom{flex-direction:column}
+      .modal-card{grid-template-columns:1fr;max-width:420px}
+      .modal-image{height:240px;min-height:240px}.modal-content{padding:22px}
+      .modal-content h3{font-size:23px}
+    }
+    @media(max-width:370px){.brand-copy strong{font-size:18px}.category-card{height:190px}.product-name{font-size:13px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <div class="demo-bar">INDEPENDENT WEBSITE DEMO · Prepared by Hamza Solutions · Sample prices and catalogue details require owner confirmation</div>
+  <div class="announcement">Freshly prepared Burkina · Creamy · Nutritious · Refreshing</div>
+
+  <header class="header">
+    <div class="container navbar">
+      <button class="icon-btn menu-btn" id="menuOpen" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <a href="#" class="brand" aria-label="Ms. Rya home">
+        <span class="brand-mark">R</span>
+        <span class="brand-copy"><strong>Ms. Rya</strong><small>Fally Burkina Drink</small></span>
+      </a>
+      <nav class="nav-links">
+        <a href="#">Home</a><a href="#products">Our Drinks</a><a href="#about">Our Story</a><a href="#contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn" id="searchFocus" aria-label="Search drinks">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="10.8" cy="10.8" r="7.2"/><path d="m16 16 5 5"/></svg>
+        </button>
+        <button class="icon-btn" id="cartOpen" aria-label="Open basket">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 8h14l1 13H4L5 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="overlay" id="menuOverlay"></div>
+  <aside class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-top">
+      <a href="#" class="brand"><span class="brand-mark">R</span><span class="brand-copy"><strong>Ms. Rya</strong><small>Fally Burkina Drink</small></span></a>
+      <button class="close-btn" id="menuClose" aria-label="Close menu">×</button>
+    </div>
+    <nav class="mobile-links">
+      <a href="#" class="mobile-link">Home</a><a href="#products" class="mobile-link">Our Drinks</a>
+      <a href="#about" class="mobile-link">Our Story</a><a href="#contact" class="mobile-link">Contact</a>
+    </nav>
+  </aside>
+
+  <section class="hero">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-content" id="heroContent">
+      <span class="eyebrow">A refreshing taste of goodness</span>
+      <h1>Refresh Your Day.<br><em>The Fally Burkina Way.</em></h1>
+      <p>Enjoy Ms. Rya Fally Burkina Drink — a creamy, refreshing milk-and-grain drink made for a satisfying treat.</p>
+      <div class="hero-buttons"><a href="#products" class="btn btn-primary">Order Your Drink <span>→</span></a><a href="#about" class="btn btn-outline">Discover Ms. Rya</a></div>
+    </div>
+    <div class="hero-dots" id="heroDots"></div>
+    <div class="hero-controls"><button class="hero-arrow" id="heroPrev" aria-label="Previous slide">←</button><button class="hero-arrow" id="heroNext" aria-label="Next slide">→</button></div>
+  </section>
+
+  <section class="benefits">
+    <div class="container benefit-grid">
+      <div class="benefit"><span class="benefit-icon">✦</span><div><strong>Creamy & Satisfying</strong><small>A smooth milk-and-grain drink</small></div></div>
+      <div class="benefit"><span class="benefit-icon">❄</span><div><strong>Best Served Chilled</strong><small>Keep refrigerated before enjoying</small></div></div>
+      <div class="benefit"><span class="benefit-icon">♡</span><div><strong>Easy WhatsApp Ordering</strong><small>Send your order directly to us</small></div></div>
+    </div>
+  </section>
+
+  <section class="section" id="categories">
+    <div class="container">
+      <div class="section-heading reveal"><span class="eyebrow">Made for your cravings</span><h2>Find Your Fally Favourite</h2><p>Choose a bottle, explore the menu and place your order in a few simple steps.</p></div>
+      <div class="category-grid">
+        <article class="category-card reveal" data-filter="burkina"><img src="./images/Refreshing Ms. Rya Fally Drink Display (1).png" alt="Creamy milk drink"><div class="category-copy"><small>Our signature drink</small><h3>Fally Burkina</h3><b>Explore drink →</b></div></article>
+        <article class="category-card reveal" data-filter="bottle"><img src="./images/Ms. Rya Fally Burkina Drink Collection.png" alt="Bottled milk drink"><div class="category-copy"><small>Ready when you are</small><h3>Bottled Goodness</h3><b>Choose a bottle →</b></div></article>
+        <article class="category-card reveal" data-filter="bundle"><img src="./images/Ms. Rya Fally Burkina Drink Display.png" alt="Refreshments arranged for sharing"><div class="category-copy"><small>Share the goodness</small><h3>Group Orders</h3><b>Order together →</b></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="promo-slider" aria-label="Fally Burkina promotional slideshow">
+    <div class="promo-slide-bg" id="promoBg"></div>
+    <div class="promo-content" id="promoContent">
+      <span class="eyebrow">The taste worth coming back for</span>
+      <h2>A Little Refreshment.<br>A Lot of Enjoyment.</h2>
+      <p>Make your day a little more refreshing with Ms. Rya Fally Burkina Drink. Remember to keep your bottle chilled.</p>
+      <a href="#products" class="btn btn-light">Browse the drinks →</a>
+    </div>
+    <div class="promo-dots" id="promoDots"></div>
+  </section>
+
+  <section class="section shop-section" id="products">
+    <div class="container">
+      <div class="section-heading reveal"><span class="eyebrow">The Ms. Rya menu</span><h2>Order Your Fally Burkina</h2><p>Choose your preferred bottle option and add it to your basket.</p><p class="demo-note">Demo catalogue: bottle sizes and prices below are placeholders pending confirmation from the business owner.</p></div>
+      <div class="shop-toolbar">
+        <div class="filter-list" id="filterList">
+          <button class="filter-btn active" data-filter="all">All Options</button>
+          <button class="filter-btn" data-filter="burkina">Fally Burkina</button>
+          <button class="filter-btn" data-filter="bottle">Bottle Options</button>
+          <button class="filter-btn" data-filter="bundle">Group Orders</button>
+        </div>
+        <div class="shop-tools">
+          <div class="search-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.8" cy="10.8" r="7.2"/><path d="m16 16 5 5"/></svg><input id="productSearch" type="search" placeholder="Search the menu..."></div>
+          <select class="sort-select" id="sortProducts" aria-label="Sort menu"><option value="featured">Featured</option><option value="low">Price: Low to High</option><option value="high">Price: High to Low</option></select>
+        </div>
+      </div>
+      <div class="product-grid" id="productGrid"></div>
+      <p class="price-disclaimer">All displayed prices and bottle sizes are sample demo content. Confirm the actual menu, quantities and prices with Ms. Rya before accepting customer orders.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="story reveal" id="about">
+        <div class="story-image"><img src="./images/Refreshing Burkina Drink Splash.png" alt="Fresh milk being poured into a glass"></div>
+        <div class="story-copy">
+          <span class="eyebrow">A taste from Ms. Rya</span>
+          <h2>Freshen Up Your Day, One Bottle at a Time.</h2>
+          <p>Meet Fally Burkina Drink: a creamy milk-and-grain refreshment prepared for people who enjoy a rich, satisfying drink. Whether you're taking a break between lectures or sharing with friends, make room for a chilled bottle.</p>
+          <a href="#products" class="btn btn-primary">Explore the menu →</a>
+        </div>
+      </div>
+      <div class="promise-grid reveal">
+        <div class="promise"><b>Creamy</b><span>A smooth, rich drink experience</span></div>
+        <div class="promise"><b>Refreshing</b><span>Enjoy chilled for best experience</span></div>
+        <div class="promise"><b>Convenient</b><span>Order directly through WhatsApp</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-band" id="contact">
+    <span class="eyebrow">Your next refreshment is a message away</span>
+    <h2>Ready for a Chilled Fally?</h2>
+    <p>Send us your order and we'll get back to you to confirm availability and collection or delivery details.</p>
+    <a href="#" class="btn btn-light" id="contactWhatsApp">Chat & Order on WhatsApp →</a>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div><a href="#" class="brand"><span class="brand-mark">R</span><span class="brand-copy"><strong>Ms. Rya</strong><small>Fally Burkina Drink</small></span></a><p class="footer-desc">Creamy, refreshing Fally Burkina Drink. Find your favourite bottle and send your order directly to us.</p></div>
+        <div><h4>Explore</h4><div class="footer-links"><a href="#products">Our Drinks</a><a href="#about">About Ms. Rya</a><a href="#contact">Contact</a></div></div>
+        <div><h4>Contact</h4><div class="footer-links"><a href="tel:+233550435007">055 043 5007</a><a href="tel:+233599870463">059 987 0463</a><span>KSTU, Kumasi</span></div></div>
+        <div><h4>Order Information</h4><div class="footer-links"><span>WhatsApp orders</span><span>MoMo accepted</span><span>Keep chilled</span></div></div>
+      </div>
+      <div class="footer-bottom"><span>© <span id="year"></span> Ms. Rya Fally Burkina Drink. Demo concept by Hamza Solutions.</span><span>Stay Healthy · Stay Happy ♡</span></div>
+    </div>
+  </footer>
+
+  <div class="overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="drawer-head"><h3>Your Basket</h3><button class="close-btn" id="cartClose" aria-label="Close basket">×</button></div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer"><div class="subtotal"><span>Estimated subtotal</span><span id="cartSubtotal">GH₵0.00</span></div><p class="cart-note">Delivery or collection details and final availability will be confirmed by the business when you send your order.</p><button class="btn btn-primary checkout-btn" id="whatsappCheckout">Send Order on WhatsApp →</button><span class="continue" id="continueShopping">Continue browsing</span></div>
+  </aside>
+
+  <div class="overlay" id="modalOverlay"></div>
+  <div class="quick-modal" id="quickModal">
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose" aria-label="Close product details">×</button>
+      <div class="modal-image"><img id="modalImage" src="" alt=""></div>
+      <div class="modal-content">
+        <span class="product-category" id="modalCategory"></span><h3 id="modalName"></h3><div class="modal-price" id="modalPrice"></div>
+        <p id="modalDescription"></p>
+        <div id="optionArea"><div class="modal-label">Choose an option</div><div class="option-list" id="optionList"></div></div>
+        <button class="btn btn-primary modal-add" id="modalAdd">Add to Basket →</button>
+      </div>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+
+  <script>
+    /* ==========================================================
+       MS. RYA DEMO STORE — CONFIGURATION
+       Confirm the real WhatsApp number and all prices before launch.
+       The first phone number from the supplied flyer is used as a
+       provisional WhatsApp destination. Change it if needed.
+       ========================================================== */
+    const STORE = {
+      name: "Ms. Rya Fally Burkina Drink",
+      whatsapp: "233550435007",
+      phonePrimary: "0550435007",
+      phoneSecondary: "0599870463",
+      location: "KSTU, Kumasi"
+    };
+
+    /* Sample bottle sizes and prices — replace with owner's actual menu. */
+    const products = [
+      {
+        id: 1, name: "Fally Burkina — Regular Bottle", category: "burkina",
+        price: 20, badge: "Popular", featured: true,
+        image: "./images/Ms. Rya Fally Icy Drink  singleShowcase-1.png",
+        description: "A sample regular bottle option of Ms. Rya's creamy milk-and-grain Burkina drink. Confirm actual bottle volume and price.",
+        options: ["Regular bottle"]
+      },
+      {
+        id: 2, name: "Fally Burkina — Large Bottle", category: "burkina",
+        price: 35, badge: "Sample option", featured: true,
+        image: "./images/Ms. Rya Fally Burkina Drink Ad.png",
+        description: "A larger sample bottle option for customers who want more to enjoy. Bottle volume and price are placeholders.",
+        options: ["Large bottle"]
+      },
+      {
+        id: 3, name: "Fally Burkina — Family Size", category: "bottle",
+        price: 55, badge: "For sharing", featured: false,
+        image: "./images/Ms. Rya Fally Burkina Drink Ad.png",
+        description: "A sample sharing-size option for friends or family. Confirm availability and actual quantity with the business.",
+        options: ["Family size"]
+      },
+      {
+        id: 4, name: "Fally Burkina — Group Order", category: "bundle",
+        price: 100, badge: "Group order", featured: false,
+        image: "./images/Ms. Rya Fally Burkina Drink Display.png",
+        description: "A sample group-order listing. The business will confirm the number of bottles, total price and collection arrangements.",
+        options: ["Group order"]
+      }
+    ];
+
+    const categoryLabels = {
+      burkina: "Fally Burkina", bottle: "Bottle Options", bundle: "Group Orders"
+    };
+    let cart = [];
+    let activeFilter = "all";
+    let currentProduct = null;
+    let selectedOption = "";
+    let heroIndex = 0;
+    let promoIndex = 0;
+
+    const money = value => "GH₵" + Number(value).toLocaleString("en-GH", {
+      minimumFractionDigits: 2, maximumFractionDigits: 2
+    });
+
+    const $ = id => document.getElementById(id);
+    const cartDrawer = $("cartDrawer");
+    const cartOverlay = $("cartOverlay");
+    const mobileMenu = $("mobileMenu");
+    const menuOverlay = $("menuOverlay");
+    const quickModal = $("quickModal");
+    const modalOverlay = $("modalOverlay");
+
+    function renderProducts() {
+      const term = $("productSearch").value.trim().toLowerCase();
+      const sort = $("sortProducts").value;
+      let list = products.filter(p => {
+        const categoryMatch = activeFilter === "all" || p.category === activeFilter ||
+          (activeFilter === "bottle" && p.category === "burkina");
+        const searchMatch = (p.name + " " + p.description + " " + categoryLabels[p.category]).toLowerCase().includes(term);
+        return categoryMatch && searchMatch;
+      });
+      if (sort === "low") list.sort((a,b) => a.price-b.price);
+      if (sort === "high") list.sort((a,b) => b.price-a.price);
+      if (sort === "featured") list.sort((a,b) => Number(b.featured)-Number(a.featured));
+
+      if (!list.length) {
+        $("productGrid").innerHTML = '<div class="empty-state"><strong>No matching drinks found.</strong><br>Try another search or choose a different category.</div>';
+        return;
+      }
+      $("productGrid").innerHTML = list.map(p => `
+        <article class="product-card">
+          <div class="product-image" onclick="openQuickView(${p.id})">
+            <img src="${p.image}" alt="${p.name}" loading="lazy">
+            ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ""}
+            <button class="quick-view" onclick="event.stopPropagation();openQuickView(${p.id})">View details</button>
+          </div>
+          <div class="product-info">
+            <span class="product-category">${categoryLabels[p.category]}</span>
+            <h3 class="product-name">${p.name}</h3>
+            <p class="product-description">${p.description}</p>
+            <div class="product-bottom"><span class="product-price">${money(p.price)}</span>
+              <button class="add-btn" onclick="quickAdd(${p.id})" aria-label="Add ${p.name} to basket">+</button>
+            </div>
+          </div>
+        </article>`).join("");
+    }
+
+    $("filterList").addEventListener("click", e => {
+      const btn = e.target.closest("[data-filter]");
+      if (!btn) return;
+      activeFilter = btn.dataset.filter;
+      document.querySelectorAll(".filter-btn").forEach(b => b.classList.toggle("active", b === btn));
+      renderProducts();
+    });
+    document.querySelectorAll(".category-card").forEach(card => card.addEventListener("click", () => {
+      activeFilter = card.dataset.filter;
+      document.querySelectorAll(".filter-btn").forEach(b => b.classList.toggle("active", b.dataset.filter === activeFilter));
+      renderProducts();
+      $("products").scrollIntoView({behavior:"smooth"});
+    }));
+    $("productSearch").addEventListener("input", renderProducts);
+    $("sortProducts").addEventListener("change", renderProducts);
+    $("searchFocus").addEventListener("click", () => {
+      $("products").scrollIntoView({behavior:"smooth"});
+      setTimeout(() => $("productSearch").focus(), 450);
+    });
+
+    function saveCart() {
+      try { localStorage.setItem("ms_rya_demo_cart", JSON.stringify(cart)); } catch (e) {}
+    }
+    function loadCart() {
+      try { cart = JSON.parse(localStorage.getItem("ms_rya_demo_cart")) || []; } catch (e) { cart = []; }
+      renderCart();
+    }
+    function addToCart(product, option) {
+      const existing = cart.find(i => i.id === product.id && i.option === option);
+      if (existing) existing.quantity++;
+      else cart.push({...product, option, quantity:1});
+      saveCart(); renderCart(); showToast(product.name + " added to basket");
+    }
+    function quickAdd(id) {
+      const p = products.find(x => x.id === id);
+      if (!p) return;
+      if (p.options.length > 1) return openQuickView(id);
+      addToCart(p, p.options[0]);
+    }
+    function changeQuantity(id, option, amount) {
+      const item = cart.find(i => i.id === id && i.option === option);
+      if (!item) return;
+      item.quantity += amount;
+      if (item.quantity <= 0) cart = cart.filter(i => !(i.id === id && i.option === option));
+      saveCart(); renderCart();
+    }
+    function removeItem(id, option) {
+      cart = cart.filter(i => !(i.id === id && i.option === option));
+      saveCart(); renderCart();
+    }
+    function renderCart() {
+      const count = cart.reduce((n,i) => n+i.quantity, 0);
+      const total = cart.reduce((n,i) => n+i.price*i.quantity, 0);
+      $("cartCount").textContent = count;
+      $("cartSubtotal").textContent = money(total);
+      $("cartItems").innerHTML = cart.length ? cart.map(i => `
+        <div class="cart-item">
+          <img src="${i.image}" alt="${i.name}">
+          <div><h4>${i.name}</h4><p>${money(i.price)}</p><small>${i.option}</small>
+            <div class="qty"><button onclick="changeQuantity(${i.id},'${i.option}',-1)">−</button><span>${i.quantity}</span><button onclick="changeQuantity(${i.id},'${i.option}',1)">+</button></div>
+          </div>
+          <button class="remove-item" onclick="removeItem(${i.id},'${i.option}')">Remove</button>
+        </div>`).join("") : '<div class="cart-empty"><strong>Your basket is empty</strong>Choose a chilled Fally Burkina option to get started.</div>';
+      $("whatsappCheckout").disabled = !cart.length;
+      $("whatsappCheckout").style.opacity = cart.length ? "1" : ".5";
+    }
+    function openCart() { closeMenu(); cartDrawer.classList.add("open"); cartOverlay.classList.add("show"); document.body.classList.add("lock"); }
+    function closeCart() { cartDrawer.classList.remove("open"); cartOverlay.classList.remove("show"); unlockBody(); }
+    $("cartOpen").addEventListener("click", openCart);
+    $("cartClose").addEventListener("click", closeCart);
+    $("continueShopping").addEventListener("click", closeCart);
+    cartOverlay.addEventListener("click", closeCart);
+
+    function openQuickView(id) {
+      const p = products.find(x => x.id === id);
+      if (!p) return;
+      currentProduct = p; selectedOption = p.options[0];
+      $("modalImage").src = p.image; $("modalImage").alt = p.name;
+      $("modalCategory").textContent = categoryLabels[p.category];
+      $("modalName").textContent = p.name; $("modalPrice").textContent = money(p.price);
+      $("modalDescription").textContent = p.description;
+      $("optionArea").style.display = p.options.length > 1 ? "block" : "none";
+      $("optionList").innerHTML = p.options.map((o,i) => `<button class="option-btn ${i===0?"selected":""}" data-option="${o}">${o}</button>`).join("");
+      $("optionList").querySelectorAll("[data-option]").forEach(btn => btn.addEventListener("click", () => {
+        selectedOption = btn.dataset.option;
+        $("optionList").querySelectorAll(".option-btn").forEach(b => b.classList.toggle("selected", b === btn));
+      }));
+      quickModal.classList.add("show"); modalOverlay.classList.add("show"); document.body.classList.add("lock");
+    }
+    function closeQuickView() { quickModal.classList.remove("show"); modalOverlay.classList.remove("show"); unlockBody(); }
+    $("modalClose").addEventListener("click", closeQuickView);
+    modalOverlay.addEventListener("click", closeQuickView);
+    $("modalAdd").addEventListener("click", () => {
+      if (!currentProduct) return;
+      addToCart(currentProduct, selectedOption);
+      closeQuickView(); openCart();
+    });
+
+    function sendWhatsApp(message) {
+      if (!/^\d{10,15}$/.test(STORE.whatsapp)) {
+        showToast("Please configure the business WhatsApp number first."); return;
+      }
+      const url = "https://wa.me/" + STORE.whatsapp + "?text=" + encodeURIComponent(message);
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+    $("whatsappCheckout").addEventListener("click", () => {
+      if (!cart.length) return;
+      const total = cart.reduce((n,i) => n+i.price*i.quantity, 0);
+      const lines = cart.map(i => `• ${i.name}\n  Option: ${i.option}\n  Quantity: ${i.quantity}\n  Amount: ${money(i.price*i.quantity)}`);
+      const message = [
+        `Hello ${STORE.name}! I'd like to place an order:`, "",
+        ...lines, "", `Estimated subtotal: ${money(total)}`, "",
+        "Please confirm availability, actual price, collection/delivery options and payment details. Thank you!"
+      ].join("\n");
+      sendWhatsApp(message);
+    });
+    $("contactWhatsApp").addEventListener("click", e => {
+      e.preventDefault();
+      sendWhatsApp("Hello Ms. Rya! I'd like to enquire about Fally Burkina Drink. Please share your available bottle options and prices. Thank you.");
+    });
+
+    function openMenu() { mobileMenu.classList.add("open"); menuOverlay.classList.add("show"); document.body.classList.add("lock"); }
+    function closeMenu() { mobileMenu.classList.remove("open"); menuOverlay.classList.remove("show"); unlockBody(); }
+    $("menuOpen").addEventListener("click", openMenu);
+    $("menuClose").addEventListener("click", closeMenu);
+    menuOverlay.addEventListener("click", closeMenu);
+    document.querySelectorAll(".mobile-link").forEach(a => a.addEventListener("click", closeMenu));
+    function unlockBody() {
+      const open = cartDrawer.classList.contains("open") || mobileMenu.classList.contains("open") || quickModal.classList.contains("show");
+      if (!open) document.body.classList.remove("lock");
+    }
+
+    const heroSlides = [
+      {image:"./images/Ms. Rya Fally Icy Drink hero2 Showcase-1.png",eyebrow:"A refreshing taste of goodness",title:"Refresh Your Day.<br><em>The Fally Burkina Way.</em>",description:"Enjoy Ms. Rya Fally Burkina Drink — a creamy, refreshing milk-and-grain drink made for a satisfying treat."},
+      {image:"./images/Ms. Rya Fally Burkina Drink Display.png",eyebrow:"Creamy · Nutritious · Refreshing",title:"A Smooth Sip.<br><em>A Happier Break.</em>",description:"Take a refreshing break with a chilled bottle of Fally Burkina. Your next favourite drink is just an order away."},
+      {image:"./images/Refreshing Burkina Drink Splash.png",eyebrow:"Made for your everyday moments",title:"Keep It Chilled.<br><em>Enjoy Every Sip.</em>",description:"Whether you're on campus or spending time with friends, make your moment more refreshing with Ms. Rya."}
+    ];
+    function showHero(index) {
+      heroIndex = (index + heroSlides.length) % heroSlides.length;
+      const s = heroSlides[heroIndex];
+      $("heroBg").style.opacity = "0"; $("heroContent").style.opacity = "0";
+      setTimeout(() => {
+        $("heroBg").style.backgroundImage = `url("${s.image}")`;
+        $("heroContent").querySelector(".eyebrow").textContent = s.eyebrow;
+        $("heroContent").querySelector("h1").innerHTML = s.title;
+        $("heroContent").querySelector("p").textContent = s.description;
+        $("heroBg").style.opacity = "1"; $("heroContent").style.opacity = "1";
+      },180);
+      document.querySelectorAll(".hero-dot").forEach((d,i) => d.classList.toggle("active",i===heroIndex));
+    }
+    $("heroDots").innerHTML = heroSlides.map((s,i) => `<button class="hero-dot ${i===0?"active":""}" data-index="${i}" aria-label="Go to hero slide ${i+1}"></button>`).join("");
+    $("heroDots").querySelectorAll("button").forEach(b => b.addEventListener("click", () => showHero(Number(b.dataset.index))));
+    $("heroPrev").addEventListener("click", () => showHero(heroIndex-1));
+    $("heroNext").addEventListener("click", () => showHero(heroIndex+1));
+    let heroTimer = setInterval(() => showHero(heroIndex+1),6500);
+    document.querySelector(".hero").addEventListener("mouseenter", () => clearInterval(heroTimer));
+    document.querySelector(".hero").addEventListener("mouseleave", () => { clearInterval(heroTimer); heroTimer=setInterval(() => showHero(heroIndex+1),6500); });
+    showHero(0);
+
+    const promoSlides = [
+      {image:"./images/Ms. Rya Fally Icy Drink hero2 Showcase-1.png",eyebrow:"A refreshing taste of goodness",title:"Refresh Your Day.<br><em>The Fally Burkina Way.</em>",description:"Enjoy Ms. Rya Fally Burkina Drink — a creamy, refreshing milk-and-grain drink made for a satisfying treat."},
+      {image:"./images/Ms. Rya Fally Burkina Drink Display.png",eyebrow:"Creamy · Nutritious · Refreshing",title:"A Smooth Sip.<br><em>A Happier Break.</em>",description:"Take a refreshing break with a chilled bottle of Fally Burkina. Your next favourite drink is just an order away."},
+      {image:"./images/Refreshing Burkina Drink Splash.png",eyebrow:"Made for your everyday moments",title:"Keep It Chilled.<br><em>Enjoy Every Sip.</em>",description:"Whether you're on campus or spending time with friends, make your moment more refreshing with Ms. Rya."}
+    ];
+    function showPromo(index) {
+      promoIndex = (index+promoSlides.length)%promoSlides.length;
+      const s=promoSlides[promoIndex];
+      $("promoBg").style.opacity="0";$("promoContent").style.opacity="0";
+      setTimeout(()=>{
+        $("promoBg").style.backgroundImage=`url("${s.image}")`;
+        $("promoContent").querySelector(".eyebrow").textContent=s.eyebrow;
+        $("promoContent").querySelector("h2").innerHTML=s.title;
+        $("promoContent").querySelector("p").textContent=s.description;
+        $("promoBg").style.opacity="1";$("promoContent").style.opacity="1";
+      },180);
+      document.querySelectorAll(".promo-dot").forEach((d,i)=>d.classList.toggle("active",i===promoIndex));
+    }
+    $("promoDots").innerHTML=promoSlides.map((s,i)=>`<button class="promo-dot ${i===0?"active":""}" data-index="${i}" aria-label="Go to promotion ${i+1}"></button>`).join("");
+    $("promoDots").querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>showPromo(Number(b.dataset.index))));
+    let promoTimer=setInterval(()=>showPromo(promoIndex+1),7200);
+    $("promoBg").parentElement.addEventListener("mouseenter",()=>clearInterval(promoTimer));
+    $("promoBg").parentElement.addEventListener("mouseleave",()=>{clearInterval(promoTimer);promoTimer=setInterval(()=>showPromo(promoIndex+1),7200)});
+    showPromo(0);
+
+    let toastTimer;
+    function showToast(message) {
+      $("toast").textContent=message;$("toast").classList.add("show");
+      clearTimeout(toastTimer);toastTimer=setTimeout(()=>$("toast").classList.remove("show"),2400);
+    }
+    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+      if(entry.isIntersecting){entry.target.classList.add("visible");observer.unobserve(entry.target)}
+    }),{threshold:.12});
+    document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+    document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCart();closeMenu();closeQuickView()}});
+    $("year").textContent=new Date().getFullYear();
+    renderProducts();loadCart();
+  </script>
+</body>
+</html>
